@@ -288,6 +288,21 @@
       filter: grayscale(8%);
     }
 
+    /* Keep the floating card separate from the speaker */
+    .teaching-image-wrapper {
+      position: relative;
+      overflow: visible;
+    }
+
+    .teaching-image {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: 65% center;
+      display: block;
+      filter: grayscale(8%);
+    }
+
     .panel-float {
       position: absolute;
       right: 0;
@@ -323,10 +338,17 @@
       font-size: 0.88rem;
     }
 
-    .sticker {
+    .teaching-philosophy-card {
       position: absolute;
-      left: 36px;
-      bottom: 38px;
+      top: -24px;
+      right: -24px;
+      z-index: 2;
+      max-width: 240px;
+    }
+
+    .sticker {
+      display: inline-block;
+      margin: 16px 0 0 36px;
       background: var(--accent);
       color: var(--white);
       padding: 16px 18px;
@@ -801,110 +823,6 @@
       box-shadow: 0 0 0 6px rgba(243, 129, 33, 0.12);
     }
 
-    .workshop-lab {
-      background: var(--white);
-    }
-
-    .lab-layout {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 34px;
-      align-items: start;
-    }
-
-    .lab-rail {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      position: sticky;
-      top: 100px;
-    }
-
-    .rail-card {
-      background: var(--cream);
-      padding: 24px;
-      border-left: 3px solid var(--accent);
-    }
-
-    .rail-card strong {
-      display: block;
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 1.45rem;
-      letter-spacing: 0.03em;
-      margin-bottom: 6px;
-      font-weight: 400;
-    }
-
-    .rail-card span {
-      display: block;
-      color: #506684;
-      line-height: 1.65;
-      font-size: 0.9rem;
-    }
-
-    .lab-board {
-      background: linear-gradient(180deg, #f8fbff 0%, #eef3f8 100%);
-      border: 1px solid var(--border);
-      padding: 26px;
-      box-shadow: var(--shadow);
-    }
-
-    .session-track {
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 18px;
-      align-items: start;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .session-track:last-child {
-      border-bottom: none;
-    }
-
-    .track-time {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 1.8rem;
-      line-height: 1;
-      color: var(--accent);
-    }
-
-    .track-card {
-      background: var(--card);
-      padding: 22px;
-      border: 1px solid rgba(29, 61, 112, 0.08);
-    }
-
-    .track-card h4 {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 1.45rem;
-      letter-spacing: 0.03em;
-      margin-bottom: 8px;
-    }
-
-    .track-card p {
-      color: #4a6080;
-      line-height: 1.72;
-      font-size: 0.92rem;
-      margin-bottom: 14px;
-    }
-
-    .track-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .track-tags span {
-      padding: 8px 12px;
-      background: var(--cream);
-      font-size: 0.74rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--black);
-      font-weight: 500;
-    }
-
     .outcomes {
       background: linear-gradient(180deg, #f9fafc 0%, #ffffff 100%);
     }
@@ -1009,8 +927,13 @@
 
     .showcase-photo {
       display: grid;
-      grid-template-rows: 1fr auto;
+      grid-template-rows: auto auto;
       gap: 18px;
+      align-content: start;
+    }
+
+    .showcase-photo .photo-large {
+      min-height: 0;
     }
 
     .photo-large {
@@ -1025,6 +948,15 @@
       object-fit: cover;
       object-position: center top;
       filter: grayscale(10%);
+    }
+
+    .photo-large img.signature-image {
+      width: 100%;
+      height: auto !important;
+      object-fit: contain !important;
+      object-position: center;
+      display: block;
+      background: #0b0f14;
     }
 
     .quote-card {
@@ -1367,7 +1299,6 @@
       .newsletter-wrap,
       .cta-wrap,
       .showcase-grid,
-      .lab-layout,
       .arch-grid,
       .manifesto-wrap,
       .ecosystem-top,
@@ -1570,14 +1501,12 @@
 
       .hero-grid,
       .arch-grid,
-      .lab-layout,
       .showcase-grid,
       .cta-wrap {
         grid-template-columns: 1fr;
       }
 
-      .arch-right,
-      .lab-rail {
+      .arch-right {
         position: static;
       }
 
@@ -1613,10 +1542,6 @@
         grid-template-columns: 1fr;
       }
 
-      .session-track {
-        grid-template-columns: 1fr;
-      }
-
       .footer-top,
       .footer-bottom {
         flex-direction: column;
@@ -1628,6 +1553,231 @@
         flex-wrap: wrap;
       }
     }
+
+    /* ===== RECENT COLLABORATIONS ===== */
+    .guest-talks {
+      background: var(--white);
+    }
+
+    .talks-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .talk-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .talk-card:hover {
+      box-shadow: 0 22px 44px rgba(29, 61, 112, 0.14);
+      transform: translateY(-6px);
+    }
+
+    .talk-poster {
+      align-items: center;
+      background: linear-gradient(180deg, #eef2f8 0%, #e2e8f1 100%);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      height: 360px;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .talk-poster img {
+      box-shadow: 0 10px 28px rgba(29, 61, 112, 0.18);
+      height: auto;
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      width: auto;
+    }
+
+    .talk-meta {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 24px 22px 26px;
+    }
+
+    .talk-topic {
+      color: var(--black);
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 1.55rem;
+      letter-spacing: 0.03em;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .talk-host {
+      color: #4c6381;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+
+    .talk-where {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .talk-where span {
+      background: rgba(243, 129, 33, 0.1);
+      color: var(--accent);
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      padding: 6px 10px;
+      text-transform: uppercase;
+    }
+
+    /* ===== WAYS TO COLLABORATE ===== */
+    .collab {
+      background: var(--cream);
+    }
+
+    .collab-tracks {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .collab-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 38px 34px;
+    }
+
+    .collab-card.feature {
+      background: var(--black);
+      border-color: var(--black);
+      color: var(--white);
+    }
+
+    .collab-kicker {
+      color: var(--accent);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .collab-card h3 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(1.9rem, 3vw, 2.45rem);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1.02;
+      margin-bottom: 14px;
+    }
+
+    .collab-card > p {
+      color: #4c6381;
+      font-size: 0.96rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .collab-card.feature > p {
+      color: #d4e0eb;
+    }
+
+    .collab-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      list-style: none;
+      margin: 0 0 30px;
+    }
+
+    .collab-list li {
+      color: #40597a;
+      font-size: 0.94rem;
+      line-height: 1.5;
+      padding-left: 26px;
+      position: relative;
+    }
+
+    .collab-card.feature .collab-list li {
+      color: #dfe8f2;
+    }
+
+    .collab-list li::before {
+      background: var(--accent);
+      border-radius: 50%;
+      content: "";
+      height: 8px;
+      left: 4px;
+      position: absolute;
+      top: 7px;
+      width: 8px;
+    }
+
+    .collab-card .btn-primary,
+    .collab-card .btn-outline {
+      align-self: flex-start;
+      margin-top: auto;
+    }
+
+    .collab-card.feature .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--white);
+    }
+
+    .collab-card.feature .btn-primary:hover {
+      background: var(--white);
+      border-color: var(--white);
+      color: var(--black);
+    }
+
+    @media (max-width: 1100px) {
+      .talks-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .guest-talks .section-head,
+      .collab .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .collab-tracks {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .talks-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .talk-poster {
+        height: auto;
+        min-height: 300px;
+      }
+
+      .collab-card {
+        padding: 30px 24px;
+      }
+    }
+    /* ===== END TEACHING ADDITIONS ===== */
   </style>
 </head>
 
@@ -1665,7 +1815,7 @@
         </p>
         <div class="hero-actions">
           <a href="#formats" class="btn-primary">Explore Formats</a>
-          <a href="#lab" class="btn-outline">See Workshop Flow</a>
+          <a href="#formats" class="btn-outline">See Teaching Approach</a>
         </div>
         <div class="teach-strip">
           <div class="teach-metric">
@@ -1683,17 +1833,17 @@
         </div>
       </div>
       <div class="hero-panel fade-up">
-        <div class="panel-main">
-          <img src="IMG_0408.JPG" alt="Srijan teaching on stage" />
-        </div>
-        <div class="panel-float">
-          <div class="mini">Teaching Philosophy</div>
-          <strong>I teach "Skills" that matters!</strong>
-          <p>
-            Sessions are designed to feel alive, rigorous, and practical —
-            where the room leaves with clarity, confidence, and a sharper
-            point of view.
-          </p>
+        <div class="teaching-image-wrapper">
+          <img src="teaching_header.png" alt="Srijan teaching on stage" class="teaching-image" />
+          <div class="panel-float teaching-philosophy-card">
+            <div class="mini">Teaching Philosophy</div>
+            <strong>I teach "Skills" that matters!</strong>
+            <p>
+              Sessions are designed to feel alive, rigorous, and practical —
+              where the room leaves with clarity, confidence, and a sharper
+              point of view.
+            </p>
+          </div>
         </div>
         <div class="sticker">Workshop First<br />Learning Design</div>
       </div>
@@ -1733,44 +1883,52 @@
       <div class="cr-wrap" id="crWrap">
         <div class="cr-viewport">
           <div class="cr-track" id="crTrack">
-            <a href="https://aseaneconomicforum.com/Economic-forum.html" class="cr-card">
-              <div class="media-wrap"><img src="WhatsApp Image 2026-07-14 at 10.27.57 AM.jpeg" alt="Neural Intelligence" loading="lazy"/></div>
+            <a href="https://www.topengineersindia.com/" class="cr-card">
+              <div class="media-wrap"><img src="workshop1.PNG" alt="Data Science with Python Workshop poster" loading="lazy"/></div>
               <div class="cr-card-info">
                 <span class="card-badge">Featured</span>
-                <h3>Neural Intelligence v1.0</h3>
-                <p>Deep-dive into neural architectures and applied AI systems for future-ready engineers.</p>
+                <h3>Data Science with Python Workshop</h3>
+                <p>A professional workshop poster highlighting Python programming, data science, and hands-on learning opportunities.</p>
+                <span class="card-arrow">Explore Module <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span></span>
+              </div>
+            </a>
+            <a href="https://www.topengineersindia.com/" class="cr-card">
+              <div class="media-wrap"><img src="workshop2.PNG" alt="AI and AI Tools Workshop poster" loading="lazy"/></div>
+              <div class="cr-card-info">
+                <h3>AI and AI Tools Workshop</h3>
+                <p>A modern promotional design showcasing AI technologies, productivity tools, and practical learning experiences.</p>
                 <span class="card-arrow">Explore Module <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span></span>
               </div>
             </a>
             <a href="https://www.linkedin.com/posts/top-engineersindia_topengineers-techworkshops-engineeringstudents-activity-7483914382997995520-zeEL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFERV6wBjc22JCLhBRwyO_gW3VzAf7il3-k" class="cr-card">
-              <div class="media-wrap"><img src="1783959089971.jpg" alt="Building an AI Application" loading="lazy"/></div>
+              <div class="media-wrap"><img src="1783959089971.jpg" alt="Data Science with Python Internship poster" loading="lazy"/></div>
               <div class="cr-card-info">
-                <h3>Building an AI Application</h3>
-                <p>Step-by-step session on integrating LLMs with real code, API costs, and latency metrics.</p>
+                <h3>Data Science with Python Internship</h3>
+                <p>A futuristic promotional design highlighting Python skills, real-world projects, and internship opportunities.</p>
                 <span class="card-arrow">Explore Module <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span></span>
               </div>
             </a>
             <a href="https://www.linkedin.com/posts/top-engineersindia_topengineers-techworkshops-engineeringstudents-activity-7483914382997995520-zeEL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFERV6wBjc22JCLhBRwyO_gW3VzAf7il3-k" class="cr-card">
-              <div class="media-wrap"><img src="1783959090236.jpg" alt="Python for Data Analysis" loading="lazy"/></div>
+              <div class="media-wrap"><img src="1783959090236.jpg" alt="AI and AI Tools Internship poster" loading="lazy"/></div>
               <div class="cr-card-info">
-                <h3>Python for Data Analysis</h3>
-                <p>Live demonstrations on cleaning and analyzing datasets using Pandas with visual insights.</p>
+                <h3>AI and AI Tools Internship</h3>
+                <p>A visually striking design promoting AI tools, practical projects, and professional skill development.</p>
                 <span class="card-arrow">Explore Module <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span></span>
               </div>
             </a>
             <a href="https://www.linkedin.com/posts/top-engineersindia_topengineers-techworkshops-engineeringstudents-activity-7483914382997995520-zeEL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFERV6wBjc22JCLhBRwyO_gW3VzAf7il3-k" class="cr-card">
-              <div class="media-wrap"><img src="1783959089655.jpg" alt="Systems Architecture" loading="lazy"/></div>
+              <div class="media-wrap"><img src="1783959089655.jpg" alt="AI and AI Tools Workshop poster" loading="lazy"/></div>
               <div class="cr-card-info">
-                <h3>Systems Architecture Review</h3>
-                <p>Deconstructs the architecture of high-traffic apps with load balancing and caching layers.</p>
+                <h3>AI and AI Tools Workshop</h3>
+                <p>A premium tech-themed poster featuring AI concepts, hands-on sessions, and workshop registration details.</p>
                 <span class="card-arrow">Explore Module <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span></span>
               </div>
             </a>
             <a href="https://www.linkedin.com/posts/top-engineersindia_topengineers-techworkshops-engineeringstudents-activity-7483914382997995520-zeEL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFERV6wBjc22JCLhBRwyO_gW3VzAf7il3-k" class="cr-card">
-              <div class="media-wrap"><img src="1783959090308.jpg" alt="Intelligent Systems" loading="lazy"/></div>
+              <div class="media-wrap"><img src="1783959090308.jpg" alt="Data Science with Python Workshop poster" loading="lazy"/></div>
               <div class="cr-card-info">
-                <h3>Intelligent Systems Workshop</h3>
-                <p>Hands-on sessions building production-grade AI pipelines and deployment workflows.</p>
+                <h3>Data Science with Python Workshop</h3>
+                <p>A bold promotional poster combining Python programming, data analytics, and an engaging workshop layout.</p>
                 <span class="card-arrow">Explore Module <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span></span>
               </div>
             </a>
@@ -1788,6 +1946,109 @@
     </div>
   </section>
   <!-- ===== END CAROUSEL SECTION ===== -->
+
+  <section id="guest-talks" class="section guest-talks">
+    <div class="section-head fade-up">
+      <div>
+        <div class="section-tag">Guest Talks &amp; Collaborations</div>
+        <h2 class="section-title">
+          Invited into rooms that want to <em>build.</em>
+        </h2>
+      </div>
+      <p class="section-sub">
+        Colleges, universities, innovation cells, and companies bring Srijan in
+        to teach what their students and teams need next: AI, data, design
+        thinking, and how real ventures actually get built.
+      </p>
+    </div>
+
+    <div class="talks-gallery fade-up">
+      <article class="talk-card">
+        <div class="talk-poster">
+          <img src="teaching-assets/ai-fundraising-pitch.jpg" alt="Using AI for Fundraising and Investor Pitch workshop poster" loading="lazy" />
+        </div>
+        <div class="talk-meta">
+          <div class="talk-topic">Using AI for Fundraising &amp; Investor Pitch</div>
+          <div class="talk-host">Department of Artificial Intelligence, Siddhartha Academy of Higher Education</div>
+          <div class="talk-where"><span>Vijayawada</span><span>Sep 2026</span></div>
+        </div>
+      </article>
+
+      <article class="talk-card">
+        <div class="talk-poster">
+          <img src="teaching-assets/design-thinking-innovation.jpg" alt="Design Thinking from Insight to Innovation workshop poster" loading="lazy" />
+        </div>
+        <div class="talk-meta">
+          <div class="talk-topic">Design Thinking: From Insight to Innovation</div>
+          <div class="talk-host">Department of Management Studies, M.O.P. Vaishnav College</div>
+          <div class="talk-where"><span>Chennai</span><span>Sep 2026</span></div>
+        </div>
+      </article>
+
+      <article class="talk-card">
+        <div class="talk-poster">
+          <img src="teaching-assets/python-powerbi-data.jpg" alt="Python and Power BI for Data Analysis workshop poster" loading="lazy" />
+        </div>
+        <div class="talk-meta">
+          <div class="talk-topic">Python &amp; Power BI for Data Analysis</div>
+          <div class="talk-host">Department event, Amity, Chennai</div>
+          <div class="talk-where"><span>Chennai</span><span>Sep 2026</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="collaborate" class="section collab">
+    <div class="section-head fade-up">
+      <div>
+        <div class="section-tag">Ways To Collaborate</div>
+        <h2 class="section-title">
+          Open for colleges <em>and</em> companies.
+        </h2>
+      </div>
+      <p class="section-sub">
+        Two clear tracks, one standard of delivery. Campus department or
+        company team, the session is built around your audience and the outcome
+        you want in the room.
+      </p>
+    </div>
+
+    <div class="collab-tracks fade-up">
+      <article class="collab-card">
+        <div class="collab-kicker">Track 01</div>
+        <h3>College &amp; Institutional Collaborations</h3>
+        <p>
+          Guest lectures, department workshops, and club or innovation-cell
+          sessions for students and faculty, on campus or online.
+        </p>
+        <ul class="collab-list">
+          <li>Guest lectures and technical workshops</li>
+          <li>Innovation cell, E-cell, and student club sessions</li>
+          <li>Faculty development and hands-on training</li>
+          <li>Hackathon mentoring and judging</li>
+          <li>Entrepreneurship bootcamps and design sprints</li>
+        </ul>
+        <a href="index.html#contact" class="btn-outline">Invite to Campus</a>
+      </article>
+
+      <article class="collab-card feature">
+        <div class="collab-kicker">Track 02</div>
+        <h3>Private &amp; Corporate Collaborations</h3>
+        <p>
+          Team upskilling, executive masterclasses, and applied innovation
+          sessions for companies, startups, and professional teams.
+        </p>
+        <ul class="collab-list">
+          <li>Team upskilling in AI, ML, and data</li>
+          <li>Executive and leadership masterclasses</li>
+          <li>Product, AI, and automation enablement</li>
+          <li>Innovation and design-thinking workshops</li>
+          <li>Startup mentoring and paid keynotes</li>
+        </ul>
+        <a href="index.html#contact" class="btn-primary">Start a Conversation</a>
+      </article>
+    </div>
+  </section>
 
   <section id="formats" class="section workshop-architecture">
     <div class="section-head fade-up">
@@ -1874,95 +2135,6 @@
     </div>
   </section>
 
-  <section id="lab" class="section workshop-lab">
-    <div class="section-head fade-up">
-      <div>
-        <div class="section-tag">Inside The Workshop</div>
-        <h2 class="section-title">
-          What the learning journey can <em>look like.</em>
-        </h2>
-      </div>
-      <p class="section-sub">
-        This section is designed like a workshop board — showing how a session
-        can move from curiosity to understanding to hands-on discussion to
-        takeaways the audience can actually use.
-      </p>
-    </div>
-    <div class="lab-layout">
-      <div class="lab-rail fade-up">
-        <div class="rail-card">
-          <strong>For Students</strong><span>Sessions that make emerging technologies and future skills feel
-            understandable, relevant, and worth pursuing.</span>
-        </div>
-        <div class="rail-card">
-          <strong>For Professionals</strong><span>Workshops that reframe what AI, learning, and industry change
-            mean for real careers and real decisions.</span>
-        </div>
-        <div class="rail-card">
-          <strong>For Institutions & Teams</strong><span>Custom learning experiences designed around the maturity,
-            language, and needs of the room.</span>
-        </div>
-      </div>
-      <div class="lab-board fade-up">
-        <div class="session-track">
-          <div class="track-time">01</div>
-          <div class="track-card">
-            <h4>Open With Context</h4>
-            <p>
-              Anchor the room in a current problem, shift, or opportunity. The
-              opening creates urgency and relevance so the audience
-              understands why the topic matters right now.
-            </p>
-            <div class="track-tags">
-              <span>Icebreakers</span><span>Context Build</span><span>Room Alignment</span>
-            </div>
-          </div>
-        </div>
-        <div class="session-track">
-          <div class="track-time">02</div>
-          <div class="track-card">
-            <h4>Teach The Core Idea</h4>
-            <p>
-              Introduce the core framework, concept, or system in a way that
-              is memorable. This is where the complexity gets translated into
-              a language the room can work with.
-            </p>
-            <div class="track-tags">
-              <span>Frameworks</span><span>Analogies</span><span>Simplification</span>
-            </div>
-          </div>
-        </div>
-        <div class="session-track">
-          <div class="track-time">03</div>
-          <div class="track-card">
-            <h4>Move Into Application</h4>
-            <p>
-              The session shifts from explanation to use. Participants
-              reflect, respond, discuss, or test the idea against problems
-              they actually care about.
-            </p>
-            <div class="track-tags">
-              <span>Discussion</span><span>Case Lens</span><span>Application</span>
-            </div>
-          </div>
-        </div>
-        <div class="session-track">
-          <div class="track-time">04</div>
-          <div class="track-card">
-            <h4>Leave With Direction</h4>
-            <p>
-              The close is designed to sharpen action: what to learn next,
-              what to rethink, what to try, and how to carry the session
-              beyond the room.
-            </p>
-            <div class="track-tags">
-              <span>Takeaways</span><span>Action Steps</span><span>Momentum</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="section outcomes">
     <div class="section-head fade-up">
@@ -2053,7 +2225,7 @@
       </div>
       <div class="showcase-photo fade-up">
         <div class="photo-large">
-          <img src="IMG_0387.JPG" alt="Srijan conducting a workshop" />
+          <img src="signature.png" alt="Srijan's signature teaching style" class="signature-image" />
         </div>
         <div class="quote-card">
           <div class="quote-mark">"</div>
